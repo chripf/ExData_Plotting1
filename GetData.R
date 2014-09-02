@@ -30,10 +30,12 @@ GetelectricData<-function(loadall=FALSE){
     library(data.table)
     
     data<-fread(filename, na.strings = c("?"), verbose = T)
-
-    # data[,DateTime<-as.POSIXct(c(data$Date, strptime(data$Time, "%H:%MeData<-:%S")))]
-    data$Date<-as.Date(data$Date, format="%d/%m/%Y")
-    data$Time<-as.POSIXct(strptime(data$Time, "%H:%M:%S"))
+    
+    data[,DTstr:=paste(Date,Time)]
+    #data[,DateTime:=as.POSIXct(strptime(data$DTStr, "%d/%m/%Y %H:%M:%S"))]
+    
+    #data$Date<-as.Date(data$Date, format="%d/%m/%Y")
+    #data$Time<-as.POSIXct(strptime(data$Time, "%H:%M:%S"))
            
     data$Global_active_power<-as.numeric(data$Global_active_power)
     data$Global_reactive_power<-as.numeric(data$Global_reactive_power)
@@ -43,5 +45,6 @@ GetelectricData<-function(loadall=FALSE){
     data$Sub_metering_2<-as.numeric(data$Sub_metering_2)
     data$Sub_metering_3<-as.numeric(data$Sub_metering_3)
    
-    data[data$Date<as.Date("20070203", "%Y%m%d") & data$Date>=as.Date("20070201", "%Y%m%d")]
+    #data[data$Date<as.Date("20070203", "%Y%m%d") & data$Date>=as.Date("20070201", "%Y%m%d")]   
+    data
 }
