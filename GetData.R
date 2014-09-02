@@ -34,7 +34,7 @@ GetelectricData<-function(loadall=FALSE){
     data[,DTstr:=paste(Date,Time)]
     #data[,DateTime:=as.POSIXct(strptime(data$DTStr, "%d/%m/%Y %H:%M:%S"))]
     
-    #data$Date<-as.Date(data$Date, format="%d/%m/%Y")
+    data$Date<-as.Date(data$Date, format="%d/%m/%Y")
     #data$Time<-as.POSIXct(strptime(data$Time, "%H:%M:%S"))
            
     data$Global_active_power<-as.numeric(data$Global_active_power)
